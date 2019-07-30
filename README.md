@@ -18,8 +18,8 @@ expects to receive
 "password": "aPassword"
 }
 ```
-if valid entry, returns the id of the registered user
-##U ser Login
+if valid entry, returns the id of the registered user  
+## User Login
 table: users  
 Method: POST  
 Endpoint: /api/users/login  
@@ -32,7 +32,7 @@ expects to receive
 ```
 if valid entry, returns a token for the user  
 
-##Musicians View All
+## Musicians View All
 table: musicians  
 Method: GET  
 Endpoints: /api/music  
