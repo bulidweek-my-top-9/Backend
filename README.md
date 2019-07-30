@@ -2,11 +2,12 @@
 
 This file contains instructions on how to access the endpoints of the My Top 9 api.
 
-##Server Link
+## Server Link
 https://top-9-backend.herokuapp.com
 # Endpoints
 
-##User Register
+## User Register  
+
 table: users  
 Method: POST  
 Endpoint: /api/users/register  
@@ -18,7 +19,7 @@ expects to receive
 }
 ```
 if valid entry, returns the id of the registered user
-##User Login
+##U ser Login
 table: users  
 Method: POST  
 Endpoint: /api/users/login  
