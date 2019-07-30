@@ -48,7 +48,7 @@ function makeToken(user) {
     expiresIn: '1d'
   };
   
-  const jwtSecret = 'add a .env file to root of project with the JWT_SECRET variable';
+  const jwtSecret = process.env.TOKEN_SECRET;
 
   return jwt.sign(jwtPayload, jwtSecret, jwtOptions)
 };
