@@ -1,4 +1,4 @@
-//require('dotenv').config(); // load .env variables
+require('dotenv').config(); // load .env variables
 
 const server = require('./server.js');
 
