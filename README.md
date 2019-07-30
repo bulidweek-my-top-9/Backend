@@ -1,3 +1,4 @@
+
 # My Top 9 Backend
 
 This file contains instructions on how to access the endpoints of the My Top 9 api.
@@ -36,3 +37,4 @@ table: musicians
 Method: GET
 Endpoints: /api/music
 returns the list of all artists in the musicians table
+
