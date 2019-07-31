@@ -1,8 +1,8 @@
 
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('musicians').truncate()
-    .then(function () {
+  // // Deletes ALL existing entries
+  // return knex('musicians').truncate()
+  //   .then(function () {
       // Inserts seed entries
       return knex('musicians').insert([
         {id: 2, artist_name: 'Aerosmith'},
@@ -40,5 +40,5 @@ exports.seed = function(knex) {
         {id: 33, artist_name: 'Radiohead'},
         {id: 34, artist_name: 'Talking Heads'}
       ]);
-    });
+    // });
 };
