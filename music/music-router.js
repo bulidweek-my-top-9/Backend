@@ -45,7 +45,23 @@ router.post("/:id", authenticate, (req, res) => {
       let artist = req.body;
       Musicians.add(artist)
       .then(() => {
+        
+        Musicians.findBy(artist_name)
+        .then(found => {
+            let fav = {
+              artist_id: found[0].id,
+              user_id: id
+            };
+            //console.log("newArtist", fav);
+        TopMusic.add(fav)
+      .then(() => {
+        //console.log("Added:", added);
         res.status(200).json(`artist not in database, added ${artist_name} to database and your top 9`)
+      })
+      .catch(error => {
+        res.status(400).json({error: error.message});
+      })
+    })
       })
       .catch(error => {
         res.status(400).json({error: error.message});
