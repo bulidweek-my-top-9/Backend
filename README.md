@@ -94,6 +94,17 @@ example
   ]
 }
 ```
+## Add New Musician to Top 9
+method: post  
+endpoint: /api/music/:id, id of the logged in user  
+expects to recieve json   
+```
+{
+	"artist_name": "name of band entered"
+}
+```
+if successful, returns a message saying the artist was added and whether it was in the database already or not  
+
 ## Musicians View All
 table: musicians  
 Method: GET  
