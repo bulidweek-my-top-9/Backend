@@ -13,7 +13,8 @@ exports.seed = function(knex) {
         {id: 6, user_id: '1', artist_id: '3'},
         {id: 7, user_id: '1', artist_id: '4'},
         {id: 8, user_id: '1', artist_id: '5'},
-        {id: 9, user_id: '1', artist_id: '6'}
+        {id: 9, user_id: '1', artist_id: '6'},
+        {id: 10, user_id: '2', artist_id: '19'}
       ]);
     // });
 };
