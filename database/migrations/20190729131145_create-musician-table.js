@@ -1,7 +1,7 @@
 
 exports.up = function(knex) {
   return knex.schema.createTable("musicians", musicians =>{
-    musicians.increments();
+    musicians.increments(40, 1);
 
     musicians
       .string("artist_name", 255)
