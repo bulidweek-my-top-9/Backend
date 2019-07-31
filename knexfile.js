@@ -56,9 +56,11 @@ module.exports = {
         max: 10
     },
     migrations: {
-        directory: "./database/migrations/"
+        directory: "./datatbase/migrations"
     },
-
+    seeds: {
+        directory: "./datatbase/seeds"
+    },
     useNullAsDefault: true
 }
 

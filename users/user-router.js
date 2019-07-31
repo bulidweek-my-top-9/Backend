@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Users = require('./user-model.js');
+const TopMusic = require('./music-fav-model.js');
 const { authenticate } = require('../auth/authenticate');
 
 const router = express.Router();
@@ -35,6 +36,21 @@ router.post("/login", (req, res) => {
   })
   .catch(error => {
     res.status(500).json({error: error.message});
+  })
+})
+router.get("/:id", (req, res) => {
+  let { id } = req.params;
+
+  Users.findById({id})
+  .first()
+  .then(user => {
+    TopMusic.findForUser({id})
+    .then(top_music => {
+      res.status(200).json({user, top_music})
+    })
+  })
+  .catch(error => {
+    res.status(400).json({error: error.message});
   })
 })
 
