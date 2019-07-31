@@ -24,9 +24,6 @@ router.post("/:id", authenticate, (req, res) => {
   .then(found => {
     //console.log("found", found)
     if(found && found.length){
-      //add to fav musicians by id of what is found
-      
-      //console.log("found", found[0].id);
       let fav = {
         artist_id: found[0].id,
         user_id: id
@@ -40,8 +37,7 @@ router.post("/:id", authenticate, (req, res) => {
       .catch(error => {
         res.status(400).json({error: error.message});
       })
-    }
-    else{
+    } else {
       let artist = req.body;
       Musicians.add(artist)
       .then(() => {
