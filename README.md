@@ -30,7 +30,18 @@ expects to receive
 "password": "aPassword"
 }
 ```
-if valid entry, returns a token for the user  
+if valid entry, returns an object of user info  
+example
+```
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0Ijo3LCJ1c2VybmFtZSI6InVzZXJ1c2VyIiwiaWF0IjoxNTY0NTk0NzQyLCJleHAiOjE1NjQ2ODExNDJ9.MyS5ggf_HrTZjkZyYJLOQFk6ULke0fct9DOyiL-xPO4",
+  "user": {
+    "id": 7,
+    "username": "useruser",
+    "password": "$2a$11$8TFa.u0cGhikoxpbOS0Xe.I5dJAw/k93xSyBgxobibtk0/1uknR.O"
+  }
+}
+```
 
 ## View User By Id
 Method: get  
