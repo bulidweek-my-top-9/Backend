@@ -56,10 +56,11 @@ module.exports = {
         max: 10
     },
     migrations: {
-        directory: "./datatbase/migrations"
+        directory: "./database/migrations",
+        tableName: "knex_migrations"
     },
     seeds: {
-        directory: "./datatbase/seeds"
+        directory: "./database/seeds"
     },
     useNullAsDefault: true
 }
