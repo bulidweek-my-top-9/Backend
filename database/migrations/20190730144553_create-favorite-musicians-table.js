@@ -6,14 +6,12 @@ exports.up = function(knex) {
   .unsigned()
   .notNullable()
   .references('id')
-  .inTable('musicians')
-  .onUpdate('CASCADE');
+  .inTable('musicians');
   tbl.integer('user_id')
   .unsigned()
   .notNullable()
   .references('id')
-  .inTable('users')
-  .onUpdate('CASCADE');  
+  .inTable('users');  
 });
 };
 
