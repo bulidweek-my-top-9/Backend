@@ -72,7 +72,7 @@ router.post("/:user_id", authenticate, (req, res) => {
 
 })
 
-router.put("/:id", (req, res) => {
+router.put("/:id", authenticate, (req, res) => {
   //set the id, user id vars from the parameters. artist name is sent in the body
   let id = req.params.id;
   //let user_id = req.params.user_id;
@@ -121,7 +121,7 @@ router.put("/:id", (req, res) => {
   })
 })
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", authenticate, (req, res) => {
    const id = req.params.id;
 
    TopMusic.remove(id)
