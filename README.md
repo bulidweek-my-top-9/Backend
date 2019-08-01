@@ -109,7 +109,7 @@ if successful, returns a message saying the artist was added and whether it was 
 ## Edit Musician in Top 9
 Token: required  
 method: put   
-endpoint: /api/music/:id, id item being edited   
+endpoint: /api/music/:id, id of item being edited   
 expects to recieve json     
 ```
 {
@@ -121,11 +121,11 @@ if successful, returns a message saying the artist was edited and whether it was
 ## Delete a Musician from Top 9 
 Token: required  
 method: delete   
-endpoint: /api/music/:id, id item being deleted   
+endpoint: /api/music/:id, id of item being deleted   
 if successful, returns the value 1 and removes item. returns 0 if item is not found  
 
 ## Musicians View All
-Token: NOT required
+Token: NOT required  
 table: musicians  
 Method: GET  
 Endpoints: /api/music  
