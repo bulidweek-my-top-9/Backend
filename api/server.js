@@ -2,9 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const userRouter = require("./users/user-router.js");
-const musicRouter = require("./music/music-router.js");
-const moviesRouter = require("./movies/movies-router.js");
+const userRouter = require("../users/user-router.js");
+const musicRouter = require("../music/music-router.js");
+const moviesRouter = require("../movies/movies-router.js");
 
 const server = express();
 

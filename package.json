@@ -1,13 +1,13 @@
 {
   "name": "my-top-9-BE",
   "version": "1.0.0",
-  "description": "",
+  "description": "build week backend",
   "main": "index.js",
   "engines": {
     "node": "10.15.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env DB_ENV=testing jest --watch",
     "start": "node index.js",
     "server": "nodemon index.js",
     "heroku-postbuild": "npm install --production && knex migrate:latest"
@@ -29,6 +29,9 @@
     "sqlite3": "^4.0.9"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "cross-env": "^5.2.0",
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
+    "supertest": "^4.0.2"
   }
 }
