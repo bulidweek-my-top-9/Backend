@@ -8,9 +8,9 @@ module.exports = {
 }
 
 async function add(user) {
-  const [id] = await db("users").insert(user);
-
-  return id;
+  return db("users")
+  .insert(user)
+  
 }
 function findBy (filter){
   return db("users").where(filter);
