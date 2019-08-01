@@ -25,6 +25,6 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
-  .dropTableIfExists("movies")
-  .dropTableIfExists("topMovies");
+  .dropTableIfExists("topMovies")
+  .dropTableIfExists("movies");
 };
