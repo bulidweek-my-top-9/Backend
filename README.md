@@ -44,6 +44,7 @@ example
 ```
 
 ## View User By Id
+Token: required
 Method: get  
 Endpoint: api/users/:id  
 if valid entry returns object with username, user id, item ids,  and names     
@@ -94,6 +95,7 @@ example:
 }
 ```
 ## Add New Musician to Top 9
+Token: required
 method: post  
 endpoint: /api/music/:user_id, id of the logged in user  
 expects to recieve json   
@@ -105,6 +107,7 @@ expects to recieve json
 if successful, returns a message saying the artist was added and whether it was in the database already or not  
 
 ## Edit Musician in Top 9
+Token: required
 method: put 
 endpoint: /api/music/:id, id item being edited 
 expects to recieve json   
@@ -116,11 +119,13 @@ expects to recieve json
 if successful, returns a message saying the artist was edited and whether it was in the database already or not 
 
 ## Delete a Musician from Top 9 
+Token: required
 method: delete 
 endpoint: /api/music/:id, id item being deleted 
 if successful, returns the value 1 and removes item. returns 0 if item is not found
- 
+
 ## Musicians View All
+Token: NOT required
 table: musicians  
 Method: GET  
 Endpoints: /api/music  
