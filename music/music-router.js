@@ -86,7 +86,7 @@ router.put("/:id", authenticate, (req, res) => {
  
       TopMusic.edit(id, artist_id) //this recieves the primary key id of the row you are altering, and the object of new forign keys
       .then(() => {
-        res.status(200).json(`artist in musicians database, entry has been changed to ${found[0].artist_name} in your top 9`)
+        res.status(200).json(`artist in musicians database, entry has been updated to ${found[0].artist_name} in your top 9`)
       })
       .catch(error => {
         res.status(400).json({error: error.message});
@@ -103,7 +103,7 @@ router.put("/:id", authenticate, (req, res) => {
       TopMusic.edit(id, artist_id)
       .then(() => {
         //console.log("Added:", added);
-        res.status(200).json(`artist not in database, entry has been added to musicians database and changed to ${found[0].artist_name}  your top 9`)
+        res.status(200).json(`artist not in database, entry has been added to musicians database and updated to ${found[0].artist_name}  your top 9`)
       })
       .catch(error => {
         res.status(400).json({error: error.message});
