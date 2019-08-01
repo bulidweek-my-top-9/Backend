@@ -107,10 +107,10 @@ expects to recieve json
 if successful, returns a message saying the artist was added and whether it was in the database already or not  
 
 ## Edit Musician in Top 9
-Token: required
-method: put 
-endpoint: /api/music/:id, id item being edited 
-expects to recieve json   
+Token: required  
+method: put   
+endpoint: /api/music/:id, id item being edited   
+expects to recieve json     
 ```
 {
 	"artist_name": "name of band entered"
@@ -119,10 +119,10 @@ expects to recieve json
 if successful, returns a message saying the artist was edited and whether it was in the database already or not 
 
 ## Delete a Musician from Top 9 
-Token: required
-method: delete 
-endpoint: /api/music/:id, id item being deleted 
-if successful, returns the value 1 and removes item. returns 0 if item is not found
+Token: required  
+method: delete   
+endpoint: /api/music/:id, id item being deleted   
+if successful, returns the value 1 and removes item. returns 0 if item is not found  
 
 ## Musicians View All
 Token: NOT required
