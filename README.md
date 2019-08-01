@@ -46,8 +46,8 @@ example
 ## View User By Id
 Method: get  
 Endpoint: api/users/:id  
-if valid entry returns object with username, id, and favs    
-example  
+if valid entry returns object with username, user id, item ids,  and names     
+example:  
 ```
 {
   "user": {
@@ -57,38 +57,37 @@ example
   "top_music": [
     {
       "artist_name": "AC/DC",
+      "id": 1,
+      "user_id": 1
+    },
+    {
+      "artist_name": "De La Soul",
+      "id": 2,
       "user_id": 1
     },
     {
       "artist_name": "Daft Punk",
+      "id": 3,
       "user_id": 1
     },
     {
-      "artist_name": "Clarence Clarity",
-      "user_id": 1
-    },
-    {
-      "artist_name": "Iceage",
-      "user_id": 1
-    },
-    {
-      "artist_name": "Aerosmith",
+      "artist_name": "Iglooghost",
+      "id": 4,
       "user_id": 1
     },
     {
       "artist_name": "Aesop Rock",
+      "id": 5,
       "user_id": 1
     },
     {
       "artist_name": "America",
+      "id": 6,
       "user_id": 1
     },
     {
       "artist_name": "Animal Collective",
-      "user_id": 1
-    },
-    {
-      "artist_name": "The Beatles",
+      "id": 7,
       "user_id": 1
     }
   ]
@@ -96,7 +95,7 @@ example
 ```
 ## Add New Musician to Top 9
 method: post  
-endpoint: /api/music/:id, id of the logged in user  
+endpoint: /api/music/:user_id, id of the logged in user  
 expects to recieve json   
 ```
 {
@@ -105,6 +104,22 @@ expects to recieve json
 ```
 if successful, returns a message saying the artist was added and whether it was in the database already or not  
 
+## Edit Musician in Top 9
+method: put 
+endpoint: /api/music/:id, id item being edited 
+expects to recieve json   
+```
+{
+	"artist_name": "name of band entered"
+}
+```
+if successful, returns a message saying the artist was edited and whether it was in the database already or not 
+
+## Delete a Musician from Top 9 
+method: delete 
+endpoint: /api/music/:id, id item being deleted 
+if successful, returns the value 1 and removes item. returns 0 if item is not found
+ 
 ## Musicians View All
 table: musicians  
 Method: GET  

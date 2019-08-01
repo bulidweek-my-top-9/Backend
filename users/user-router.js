@@ -38,8 +38,8 @@ router.post("/login", (req, res) => {
     res.status(500).json({error: error.message});
   })
 })
-router.get("/:id", authenticate, (req, res) => {
-  let { id } = req.params;
+router.get("/:user_id", authenticate, (req, res) => {
+  let id = req.params.user_id;
 
   Users.findById({id})
   .first()
