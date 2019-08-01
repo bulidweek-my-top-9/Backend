@@ -10,7 +10,7 @@ function matches(req, res, next) {
   if(parseInt(id) === req.decoded.subject){
     next();
   } else {
-    res.status(403).json("anvalid user id")
+    res.status(403).json("invalid user id")
   }
 }
 
