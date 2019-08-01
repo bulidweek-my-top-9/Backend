@@ -15,8 +15,8 @@ router.get("/", (req, res) => {
     res.status(400).json(error);
   })
 })
-router.post("/:id", authenticate, (req, res) => {
-  let { id } = req.params;
+router.post("/:user_id", authenticate, (req, res) => {
+  let { user_id } = req.params;
   let { artist_name } = req.body;
   //console.log("name", artist_name)
 
@@ -26,9 +26,10 @@ router.post("/:id", authenticate, (req, res) => {
     if(found && found.length){
       let fav = {
         artist_id: found[0].id,
-        user_id: id
+        user_id: user_id
       };
       //console.log("newArtist", fav);
+
       TopMusic.add(fav)
       .then(() => {
         //console.log("Added:", added);
@@ -46,7 +47,7 @@ router.post("/:id", authenticate, (req, res) => {
         .then(found => {
             let fav = {
               artist_id: found[0].id,
-              user_id: id
+              user_id: user_id
             };
             //console.log("newArtist", fav);
         TopMusic.add(fav)
@@ -69,7 +70,71 @@ router.post("/:id", authenticate, (req, res) => {
     res.status(400).json({error: error.message});
   })
 
-  //TopMusic.add(id)
+})
+
+router.put("/:user_id/:id", (req, res) => {
+  //set the id, user id vars from the parameters. artist name is sent in the body
+  let id = req.params.id;
+  let user_id = req.params.user_id;
+  let { artist_name } = req.body;
+  //looks for the name sent in the body, sees if it's in the databse
+  Musicians.findBy(artist_name)
+  .then(found => {
+    if(found && found.length){  //if it already exists in the database, edit the top9 only
+      let fav = { //this is the object containining new foreign keys for the table
+        artist_id: found[0].id, //this gets set to the id that was found on the musicians table 
+        user_id //the users id stays the same
+      };
+      TopMusic.edit(id, fav) //this recieves the primary key id of the row you are altering, and the object of new forign keys
+      .then(() => {
+        res.status(200).json(`artist in musicians database, entry has been changed to ${found[0].artist_name} in your top 9`)
+      })
+      .catch(error => {
+        res.status(400).json({error: error.message});
+      })
+    } else {
+      let artist = req.body;
+      Musicians.add(artist)
+      .then(() => {
+        
+        Musicians.findBy(artist_name)
+        .then(found => {
+            let fav = {
+              artist_id: found[0].id,
+              user_id: id
+            };
+            //console.log("newArtist", fav);
+      TopMusic.edit(id, fav)
+      .then(() => {
+        //console.log("Added:", added);
+        res.status(200).json(`artist not in database, entry has been added to musicians database and changed to ${found[0].artist_name}  your top 9`)
+      })
+      .catch(error => {
+        res.status(400).json({error: error.message});
+      })
+    })
+      })
+      .catch(error => {
+        res.status(400).json({error: error.message});
+      })
+      
+    }
+  })
+  .catch(error => {
+    res.status(400).json({error: error.message});
+  })
+})
+
+router.delete("/:id", (req, res) => {
+   const id = req.params.id;
+
+   TopMusic.remove(id)
+   .then(deleted => {
+     res.status(200).json(deleted)
+   })
+   .catch(error => {
+    res.status(400).json({error: error.message});
+  })
 })
 
 module.exports = router;
