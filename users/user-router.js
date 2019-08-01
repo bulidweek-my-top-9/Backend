@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Users = require('./user-model.js');
 const TopMusic = require('./music-fav-model.js');
+const TopMovies = require('../movies/top-movies-model.js');
 const { authenticate } = require('../auth/authenticate');
 
 const router = express.Router();
@@ -46,22 +47,25 @@ router.get("/:user_id", authenticate, (req, res) => {
   .then(user => {
     TopMusic.findForUser({id})
     .then(top_music => {
-      res.status(200).json({user, top_music})
+      TopMovies.findForUser({id})
+      .then(top_movies => {
+        res.status(200).json({user, top_music, top_movies})
+      })  
     })
   })
   .catch(error => {
     res.status(400).json({error: error.message});
   })
 })
-router.get("/", (req, res) => {
-  Users.find()
-  .then(users => {
-    res.status(200).json(users);
-  })
-  .catch(error => {
-    res.status(400).json(error);
-  })
-})
+// router.get("/", (req, res) => {
+//   Users.find()
+//   .then(users => {
+//     res.status(200).json(users);
+//   })
+//   .catch(error => {
+//     res.status(400).json(error);
+//   })
+// })
 
 
 function makeToken(user) {

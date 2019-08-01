@@ -52,48 +52,41 @@ example:
 ```
 {
   "user": {
-    "username": "user1",
-    "id": 1
+    "username": "backend3",
+    "id": 4
   },
   "top_music": [
     {
-      "artist_name": "AC/DC",
+      "artist_name": "disco dave",
+      "id": 11,
+      "user_id": 4
+    },
+    {
+      "artist_name": "Black Sabbath",
+      "id": 12,
+      "user_id": 4
+    }
+  ],
+  "top_movies": [
+    {
+      "movie_title": "spirited away",
       "id": 1,
-      "user_id": 1
+      "user_id": 4
     },
     {
-      "artist_name": "De La Soul",
+      "movie_title": "The Godfather",
       "id": 2,
-      "user_id": 1
+      "user_id": 4
     },
     {
-      "artist_name": "Daft Punk",
+      "movie_title": "There Will Be Blood",
       "id": 3,
-      "user_id": 1
-    },
-    {
-      "artist_name": "Iglooghost",
-      "id": 4,
-      "user_id": 1
-    },
-    {
-      "artist_name": "Aesop Rock",
-      "id": 5,
-      "user_id": 1
-    },
-    {
-      "artist_name": "America",
-      "id": 6,
-      "user_id": 1
-    },
-    {
-      "artist_name": "Animal Collective",
-      "id": 7,
-      "user_id": 1
+      "user_id": 4
     }
   ]
 }
 ```
+
 ## Add New Musician to Top 9
 Token: required
 method: post  
@@ -123,6 +116,10 @@ Token: required
 method: delete   
 endpoint: /api/music/:id, id of item being deleted   
 if successful, returns the value 1 and removes item. returns 0 if item is not found  
+
+## Movies
+
+movies endpoints are the same as music but with /movies instead of /music in the url
 
 ## Musicians View All
 Token: NOT required  
