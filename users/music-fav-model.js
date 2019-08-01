@@ -19,12 +19,12 @@ function add(artist) {
   return db("favoriteMusicians")
   .insert(artist)
 }
-function edit (id, artist) {
-  console.log("id", id);
-  console.log("artist", artist);
+function edit (id, artist_id) {
+  // console.log("id", id);
+  // console.log("artist", artist);
   return db("favoriteMusicians")
   .where({id})
-  .update(artist)
+  .update({artist_id})
 }
 
 function remove (id) {
