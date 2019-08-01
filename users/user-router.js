@@ -5,6 +5,7 @@ const Users = require('./user-model.js');
 const TopMusic = require('./music-fav-model.js');
 const TopMovies = require('../movies/top-movies-model.js');
 const { authenticate } = require('../auth/authenticate');
+const { matches } = require('../auth/check-user.js');
 
 const router = express.Router();
 
@@ -39,9 +40,8 @@ router.post("/login", (req, res) => {
     res.status(500).json({error: error.message});
   })
 })
-router.get("/:user_id", authenticate, (req, res) => {
+router.get("/:user_id", authenticate, matches, (req, res) => {
   let id = req.params.user_id;
-
   Users.findById({id})
   .first()
   .then(user => {
@@ -71,7 +71,7 @@ router.get("/:user_id", authenticate, (req, res) => {
 function makeToken(user) {
   const jwtPayload = {
     subject: user.id,
-    username: user.username,
+    username: user.username
   };
 
   const jwtOptions = {

@@ -14,7 +14,12 @@ module.exports = {
     },
     seeds: { directory: './database/seeds' },
   },
-
+  testing: {
+    client: 'sqlite3',
+    connection: {
+      filename: './data/dev.sqlite3',
+    },
+  },
   // staging: {
   //   client: 'postgresql',
   //   connection: {

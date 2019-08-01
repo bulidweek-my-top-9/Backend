@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const Movies = require('./movies-model.js');
 const TopMovies = require('./top-movies-model.js');
 const { authenticate } = require('../auth/authenticate');
+const { matches } = require('../auth/check-user.js');
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ router.get("/", (req, res) => {
     res.status(400).json(error);
   })
 })
-router.post("/:user_id", authenticate, (req, res) => {
+router.post("/:user_id", authenticate, matches, (req, res) => {
   let { user_id } = req.params;
   let { movie_title } = req.body;
   //console.log("name", movie_title)
@@ -72,7 +73,7 @@ router.post("/:user_id", authenticate, (req, res) => {
 
 })
 
-router.put("/:id", authenticate, (req, res) => {
+router.put("/:user_id/:id", authenticate, matches, (req, res) => {
   //set the id, user id vars from the parameters. movie name is sent in the body
   let id = req.params.id;
   //let user_id = req.params.user_id;
@@ -121,7 +122,7 @@ router.put("/:id", authenticate, (req, res) => {
   })
 })
 
-router.delete("/:id", authenticate, (req, res) => {
+router.delete("/:user_id/:id", authenticate, matches, (req, res) => {
    const id = req.params.id;
 
    TopMovies.remove(id)
