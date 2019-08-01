@@ -18,15 +18,15 @@ function add(movie) {
   return db("topMovies")
   .insert(movie)
 }
-function edit (id, movie_id) {
+function edit (user_id, id, movie_id) {
 
   return db("topMovies")
-  .where({id})
+  .where({user_id: user_id, id: id})
   .update({movie_id})
 }
 
-function remove (id) {
-return db("topMovies")
-.where({id: id})
-.del()
+function remove (user_id, id) {
+  return db("topMovies")
+  .where({user_id: user_id, id: id})
+  .del()
 }
