@@ -19,16 +19,16 @@ function add(artist) {
   return db("favoriteMusicians")
   .insert(artist)
 }
-function edit (id, artist_id) {
+function edit (user_id, id, artist_id) {
   // console.log("id", id);
   // console.log("artist", artist);
   return db("favoriteMusicians")
-  .where({id})
+  .where({user_id: user_id, id: id})
   .update({artist_id})
 }
 
-function remove (id) {
+function remove (user_id, id) {
 return db("favoriteMusicians")
-.where({id: id})
+.where({user_id: user_id, id: id})
 .del()
 }

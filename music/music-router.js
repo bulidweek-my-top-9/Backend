@@ -76,6 +76,7 @@ router.post("/:user_id", authenticate, matches, (req, res) => {
 router.put("/:user_id/:id", authenticate, matches, (req, res) => {
   //set the id, user id vars from the parameters. artist name is sent in the body
   let id = req.params.id;
+  let user_id = req.params.user_id;
   //let user_id = req.params.user_id;
   let { artist_name } = req.body;
   //looks for the name sent in the body, sees if it's in the databse
@@ -85,9 +86,14 @@ router.put("/:user_id/:id", authenticate, matches, (req, res) => {
       let artist_id = found[0].id;//this gets set to the id that was found on the musicians table 
         //user_id //the users id stays the same
  
-      TopMusic.edit(id, artist_id) //this recieves the primary key id of the row you are altering, and the object of new forign keys
-      .then(() => {
-        res.status(200).json(`artist in musicians database, entry has been updated to ${found[0].artist_name} in your top 9`)
+      TopMusic.edit(user_id, id, artist_id) //this recieves the primary key id of the row you are altering, and the object of new forign keys
+      .then(edited => {
+        if(edited === 1 ) {
+          res.status(200).json(`artist in musicians database, entry has been updated to ${found[0].artist_name} in your top 9`)
+        } else {
+          res.status(400).json("invalid item id")
+
+        }
       })
       .catch(error => {
         res.status(400).json({error: error.message});
@@ -101,10 +107,14 @@ router.put("/:user_id/:id", authenticate, matches, (req, res) => {
         .then(found => {
           let artist_id = found[0].id;
             //console.log("newArtist", fav);
-      TopMusic.edit(id, artist_id)
-      .then(() => {
+      TopMusic.edit(user_id, id, artist_id)
+      .then(edited => {
         //console.log("Added:", added);
-        res.status(200).json(`artist not in database, entry has been added to musicians database and updated to ${found[0].artist_name}  your top 9`)
+        if(edited === 1 ){
+          res.status(200).json(`musician not in database, entry has been added to movies database and updated to ${found[0].artist_name}  your top 9`)
+        } else {
+          res.status(400).json("invalid item id")
+        }
       })
       .catch(error => {
         res.status(400).json({error: error.message});
@@ -123,9 +133,10 @@ router.put("/:user_id/:id", authenticate, matches, (req, res) => {
 })
 
 router.delete("/:user_id/:id", authenticate, matches, (req, res) => {
-   const id = req.params.id;
+  const id = req.params.id;
+  const user_id = req.params.user_id;
 
-   TopMusic.remove(id)
+   TopMusic.remove(user_id, id)
    .then(deleted => {
      res.status(200).json(deleted)
    })
