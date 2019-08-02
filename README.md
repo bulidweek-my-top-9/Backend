@@ -52,35 +52,42 @@ example:
 ```
 {
   "user": {
-    "username": "backend3",
+    "username": "backend4",
     "id": 4
   },
   "top_music": [
     {
-      "artist_name": "disco dave",
+      "artist_name": "Black Sabbath",
       "id": 11,
       "user_id": 4
     },
     {
-      "artist_name": "Black Sabbath",
-      "id": 12,
+      "artist_name": "Nirvana",
+      "id": 14,
       "user_id": 4
     }
   ],
   "top_movies": [
     {
-      "movie_title": "spirited away",
+      "movie_title": "The Godfather",
       "id": 1,
       "user_id": 4
     },
     {
-      "movie_title": "The Godfather",
+      "movie_title": "There Will Be Blood",
       "id": 2,
+      "user_id": 4
+    }
+  ],
+  "top_animals": [
+    {
+      "animal_name": "Red Fox",
+      "id": 1,
       "user_id": 4
     },
     {
-      "movie_title": "There Will Be Blood",
-      "id": 3,
+      "animal_name": "turtle",
+      "id": 2,
       "user_id": 4
     }
   ]
@@ -115,11 +122,7 @@ if successful, returns a message saying the artist was edited and whether it was
 Token: required  
 method: delete   
 endpoint: /api/music/:user_id/:item_id, id of user and item being deleted   
-if successful, returns the value 1 and removes item. returns 0 if item is not found  
-
-## Movies
-
-movies endpoints are the same as music but with /movies instead of /music in the url
+if successful, returns the value 1 and removes item. returns 0 if item is not found   
 
 ## Musicians View All
 Token: NOT required  
@@ -127,3 +130,13 @@ table: musicians
 Method: GET  
 Endpoints: /api/music  
 returns the list of all artists in the musicians table  
+
+## Movies
+movies endpoints are the same as music but with the following differences:  
+/movies instead of /music in the url  
+json for posts and puts will contain "movie_title" instead of "artist_name" 
+
+## Animals
+animals endpoints are the same as music but with the following differences:  
+/animals instead of /music in the url  
+json for posts and puts will contain "animal_name" instead of "artist_name" 

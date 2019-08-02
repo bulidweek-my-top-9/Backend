@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const Users = require('./user-model.js');
 const TopMusic = require('./music-fav-model.js');
 const TopMovies = require('../movies/top-movies-model.js');
+const TopAnimals = require('../animals/top-animals-model.js');
 const { authenticate } = require('../auth/authenticate');
 const { matches } = require('../auth/check-user.js');
 
@@ -48,10 +49,23 @@ router.get("/:user_id", authenticate, matches, (req, res) => {
   .then(user => {
     TopMusic.findForUser({id})
     .then(top_music => {
+
       TopMovies.findForUser({id})
       .then(top_movies => {
-        res.status(200).json({user, top_music, top_movies})
-      })  
+
+        TopAnimals.findForUser({id})
+        .then(top_animals => {
+          res.status(200).json({user, top_music, top_movies, top_animals})
+        }) 
+
+      }) 
+      .catch(error => {
+        res.status(400).json({error: error.message});
+      })
+       
+    })
+    .catch(error => {
+      res.status(400).json({error: error.message});
     })
   })
   .catch(error => {
