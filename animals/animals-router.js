@@ -1,15 +1,15 @@
 const express = require('express');
-const Movies = require('./movies-model.js');
-const TopMovies = require('./top-movies-model.js');
+const Animals = require('./animals-model.js');
+const TopAnimals = require('./top-animals-model.js');
 const { authenticate } = require('../auth/authenticate');
 const { matches } = require('../auth/check-user.js');
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  Movies.find()
-  .then(movies => {
-    res.status(200).json(movies);
+  Animals.find()
+  .then(animals => {
+    res.status(200).json(animals);
   })
   .catch(error => {
     res.status(400).json(error);
@@ -17,43 +17,43 @@ router.get("/", (req, res) => {
 })
 router.post("/:user_id", authenticate, matches, (req, res) => {
   let { user_id } = req.params;
-  let { movie_title } = req.body;
+  let { animal_name } = req.body;
   //console.log("name", movie_title)
 
-  Movies.findBy(movie_title)
+  Animals.findBy(animal_name)
   .then(found => {
     //console.log("found", found)
     if(found && found.length){
       let fav = {
-        movie_id: found[0].id,
+        animal_id: found[0].id,
         user_id: user_id
       };
   
 
-      TopMovies.add(fav)
+      TopAnimals.add(fav)
       .then(() => {
         //console.log("Added:", added);
-        res.status(200).json(`movie in database, ${movie_title} has been added to your top 9`)
+        res.status(200).json(`animal in database, ${animal_name} has been added to your top 9`)
       })
       .catch(error => {
         res.status(400).json({error: error.message});
       })
     } else {
-      let movie = req.body;
-      Movies.add(movie)
+      let animal = req.body;
+      Animals.add(animal)
       .then(() => {
         
-        Movies.findBy(movie_title)
+        Animals.findBy(animal_name)
         .then(found => {
             let fav = {
-              movie_id: found[0].id,
+              animal_id: found[0].id,
               user_id: user_id
             };
       
-        TopMovies.add(fav)
+        TopAnimals.add(fav)
       .then(() => {
         //console.log("Added:", added);
-        res.status(200).json(`movie not in database, added ${movie_title} to database and your top 9`)
+        res.status(200).json(`animal not in database, added ${animal_name} to database and your top 9`)
       })
       .catch(error => {
         res.status(400).json({error: error.message});
@@ -77,18 +77,18 @@ router.put("/:user_id/:id", authenticate, matches, (req, res) => {
   let id = req.params.id;
   let user_id = req.params.user_id;
   //let user_id = req.params.user_id;
-  let { movie_title } = req.body;
+  let { animal_name } = req.body;
   //looks for the name sent in the body, sees if it's in the databse
-  Movies.findBy(movie_title)
+  Animals.findBy(animal_name)
   .then(found => {
     if(found && found.length){  //if it already exists in the database, edit the top9 only
-      let movie_id = found[0].id;//this gets set to the id that was found on the movies table 
+      let animal_id = found[0].id;//this gets set to the id that was found on the movies table 
         //user_id //the users id stays the same
  
-      TopMovies.edit(user_id, id, movie_id) //this recieves the primary key id of the row you are altering, and the object of new forign keys
+      TopAnimals.edit(user_id, id, animal_id) //this recieves the primary key id of the row you are altering, and the object of new forign keys
       .then(edited => {
         if(edited === 1){
-          res.status(200).json(`movie in movies database, entry has been updated to ${found[0].movie_title} in your top 9`)
+          res.status(200).json(`animal in animals database, entry has been updated to ${found[0].animal_name} in your top 9`)
         } else {
           res.status(400).json("invalid item id")
         }
@@ -98,19 +98,19 @@ router.put("/:user_id/:id", authenticate, matches, (req, res) => {
         res.status(400).json({error: error.message});
       })
     } else {
-      let movie = req.body;
-      Movies.add(movie)
+      let animal = req.body;
+      Animals.add(animal)
       .then(() => {
         
-        Movies.findBy(movie_title)
+        Animals.findBy(animal_name)
         .then(found => {
-          let movie_id = found[0].id;
+          let animal_id = found[0].id;
             //console.log("newmovie", fav);
-      TopMovies.edit(user_id, id, movie_id)
+      TopAnimals.edit(user_id, id, animal_id)
       .then(edited => {
         //console.log("Added:", added);
         if(edited === 1 ){
-          res.status(200).json(`movie not in database, entry has been added to movies database and updated to ${found[0].movie_title}  your top 9`)
+          res.status(200).json(`animal not in database, entry has been added to animals database and updated to ${found[0].animal_name}  your top 9`)
         } else {
           res.status(400).json("invalid item id")
         }
@@ -135,7 +135,7 @@ router.delete("/:user_id/:id", authenticate, matches, (req, res) => {
    const id = req.params.id;
    const user_id = req.params.user_id;
 
-   TopMovies.remove(user_id, id)
+   TopAnimals.remove(user_id, id)
    .then(deleted => {
      res.status(200).json(deleted)
    })
