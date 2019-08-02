@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
     res.status(400).json(error);
   })
 })
-router.post("/:user_id", authenticate, matches, (req, res) => {
+router.post("/:user_id", authenticate, matches, check9, (req, res) => {
   let { user_id } = req.params;
   let { artist_name } = req.body;
   //console.log("name", artist_name)
@@ -144,5 +144,21 @@ router.delete("/:user_id/:id", authenticate, matches, (req, res) => {
     res.status(400).json({error: error.message});
   })
 })
+
+
+function check9 (req, res, next){
+  const id = req.params.user_id;
+  TopMusic.findForUser({id})
+  .then(found => {
+    if(found.length < 9){
+      next()
+    } else {
+      res.status(400).json("user already has maximum amount of 9 items selected")
+    }
+  })
+  .catch(error => {
+    res.status(400).json({error: error.message});
+  })
+}
 
 module.exports = router;
